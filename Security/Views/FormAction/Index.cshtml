@@ -1,0 +1,66 @@
+﻿@model Security.Models.MDModel<SecurityEF.SecurityForm, SecurityEF.SecurityFormAction>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Actions : @Model.Master.ApplicationName -> @Model.Master.FormName</h2>
+<p>
+    @Html.ActionLink("Create New Action", "Create", new { pApplicationCode = Model.Master.ApplicationCode, pFormCode = Model.Master.FormCode })
+</p>
+<table width="100%" class="display" id="Table02" cellspacing="0" style="visibility:hidden">
+    <thead>
+        <tr>
+            <th>FormName</th>
+            <th>ActionName</th>
+            <th>Remarks</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.DetailList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Master.FormName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormActionCode) - @Html.DisplayFor(modelItem => item.FormActionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remarks)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { pApplicationCode = Model.Master.ApplicationCode, pFormCode = Model.Master.FormCode, pFormActionCode = item.FormActionCode })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    @Html.ActionLink("Back to Form List", "Index", "Form", new { pApplicationCode = Model.Master.ApplicationCode, pFormCode = Model.Master.FormCode }, null)
+</p>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dataTables")
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            //$("#example").show();
+            $("#Table02").css("visibility", "visible");
+            $('#Table02').dataTable({
+                "paging": false,
+                "info": false,
+                "order": [[0, "asc"]],
+                "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+                "columnDefs": [
+                    {
+                        "targets": [0],
+                        "searchable": true
+                    }
+                ]
+            });
+        });
+
+    </script>
+}

@@ -1,0 +1,76 @@
+﻿@model SecurityEF.SecurityLogin
+@{
+    Layout = string.Empty;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login : Security Module</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap/css")
+    @Styles.Render("~/Content/bootstrap/signin")
+</head>
+<body>
+    <div class="container">
+        @using (Html.BeginForm("Login", "Security", FormMethod.Post, new { @id = "Form01", @class = "form-signin" }))
+        {
+            @Html.AntiForgeryToken()
+            
+            <h2 class="form-signin-heading">Please sign in</h2>
+            @Html.ValidationSummary(true)
+            <label for="inputEmail" class="sr-only">Login Name</label>
+            @Html.TextBoxFor(model => model.LoginName, new { @class = "form-control", @placeholder = "LoginName", @required = "required", @autofocus = "autofocus" })
+            <label for="inputPassword" class="sr-only">Password</label>
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Password", @required = "required" })
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBoxFor(model => model.RememberMe) Remember me
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p style="color:red">
+        @ViewBag.LoginError
+    </p>
+        }
+    </div> <!-- /container -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @*@section Scripts {*@
+    <script>
+        // just for the demos, avoids form submit
+        jQuery.validator.setDefaults({
+            debug: true,
+            success: "valid"
+        });
+
+        $("#Form01").validate({
+            rules: {
+                //----------Validation rule for LoginName--------
+                LoginName: {
+                    required: true,
+                    maxlength: 15
+                },
+
+                ////----------Validation rule for Password--------
+                //Password: {
+                //    required: true,
+                //    minlength: 6,
+                //    maxlength: 15,
+                //    alphanumeric: true
+                //},
+            },
+            errorElement: 'span',
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    </script>
+    @*}*@
+</body>
+</html>

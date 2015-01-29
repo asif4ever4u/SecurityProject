@@ -1,0 +1,79 @@
+﻿@model Security.Models.MDModel<SecurityEF.SecurityUser, SecurityEF.SecurityUserRole>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Roles : @Model.Master.LoginName</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>SecurityUserRoles</legend>
+        <table width="100%" class="display" id="Table01" cellspacing="0" style="visibility:hidden">
+            <thead>
+                <tr>
+                    <th>ApplicationName</th>
+                    <th>Allow</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+                @for (int i = 0; i < Model.DetailList.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m.DetailList[i].RoleCode) - @Html.DisplayFor(m => m.DetailList[i].RoleName)
+                            
+                            @Html.HiddenFor(m => m.DetailList[i].ID)
+                            @Html.HiddenFor(m => m.DetailList[i].RoleCode)
+                            @Html.HiddenFor(m => m.DetailList[i].RoleName)
+                            @Html.HiddenFor(m => m.DetailList[i].UserCode)
+                            @*</td>*@
+                        <td>
+                            @Html.CheckBoxFor(m => m.DetailList[i].EnableFlag2)
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("Forms", "IndexUserForms", "UserAccess", new { pApplicationID = Model.DetailList[i].ApplicationID, pUserID = Model.Master.ID }, null)*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </fieldset>
+    <input type="submit" value="Save" />
+}
+<p>
+    @Html.ActionLink("Back to User List", "Index", "User")
+</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dataTables")
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            //$("#example").show();
+            $("#Table01").css("visibility", "visible");
+            $('#Table01').dataTable({
+                "paging": false,
+                "info": false,
+                "order": [[0, "asc"]],
+                "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+                "columnDefs": [
+                    {
+                        "targets": [1],
+                        "searchable": false
+                    }
+                ]
+            });
+        });
+
+    </script>
+}
+
+

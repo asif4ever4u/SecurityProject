@@ -1,0 +1,59 @@
+﻿@model Security.Models.MMDModel<SecurityEF.SecurityRole, SecurityEF.SecurityApplication, SecurityEF.SecurityForm>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Forms : @Model.Master1.RoleName > @Model.Master2.ApplicationName</h2>
+
+<table width="100%" class="display" id="Table01" cellspacing="0" style="visibility:hidden">
+    <thead>
+        <tr>
+            <th>Form</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.DetailList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormCode) - @Html.DisplayFor(modelItem => item.FormName)
+                </td>
+                <td>
+                    @Html.ActionLink("Actions", "Edit", new { pRoleCode = @Model.Master1.RoleCode, pApplicationCode=@Model.Master2.ApplicationCode, pFormCode = item.FormCode }) 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    @Html.ActionLink("Back to Applications", "EditRoleApps", "RoleAccess", new { pUserID = @Model.Master1.ID }, null)
+</p>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dataTables")
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            //$("#example").show();
+            $("#Table01").css("visibility", "visible");
+            $('#Table01').dataTable({
+                "paging": false,
+                "info": false,
+                "order": [[0, "asc"]],
+                "lengthMenu": [[50, 70, 100, -1], [50, 70, 100, "All"]],
+                "columnDefs": [
+                    {
+                        "targets": [1],
+                        "searchable": false
+                    }
+                ]
+            });
+        });
+
+    </script>
+}
+
+

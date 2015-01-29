@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SecurityEF.SecurityRole>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Roles</h2>
+<p>
+    @Html.ActionLink("Create New Role", "Create")
+</p>
+<table width="100%" class="display" id="Table01" cellspacing="0" style="visibility:hidden">
+    <thead>
+        <tr>
+            <th>RoleName</th>
+            <th>ActiveFlag</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleCode) - @Html.DisplayFor(modelItem => item.RoleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActiveFlag)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { pRoleCode = item.RoleCode }) |
+                    @Html.ActionLink("Apps", "EditRoleApps", "RoleAccess", new { pRoleCode = item.RoleCode }, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dataTables")
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            //$("#table01").show();
+            $("#Table01").css("visibility", "visible");
+            $('#Table01').dataTable({
+                "paging": false,
+                "info": false,
+                "columnDefs": [
+                    {
+                        "targets": [2],
+                        "searchable": false
+                    }
+                ]
+            });
+        });
+
+    </script>
+}

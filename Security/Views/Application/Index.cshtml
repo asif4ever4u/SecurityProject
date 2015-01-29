@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SecurityEF.SecurityApplication>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Applications</h2>
+<p>
+    @Html.ActionLink("Create New Application", "Create")
+</p>
+<table width="100%" class="display" id="Table01" cellspacing="0" style="visibility:hidden">
+    <thead>
+        <tr>
+            <th>ApplicationName</th>
+            <th>FullName</th>
+            <th>Active</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationCode) - @Html.DisplayFor(modelItem => item.ApplicationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActiveFlag)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { pApplicationCode = item.ApplicationCode }) |
+                    @Html.ActionLink("Forms", "Index", "Form", new { pApplicationCode = item.ApplicationCode }, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dataTables")
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            //$("#example").show();
+            $("#Table01").css("visibility", "visible");
+            $('#Table01').dataTable({
+                "paging": false,
+                "info": false,
+                "columnDefs": [
+                    {
+                        "targets": [3],
+                        "searchable": false
+                    }
+                ]
+            });
+        });
+
+    </script>
+}

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SecurityEF.SecurityUser>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Users</h2>
+<p>
+    @Html.ActionLink("Create New User", "Create", "User", null, new { @role="button", @Class = "btn btn-primary" })
+</p>
+<table width="100%" class="display" id="Table01" cellspacing="0" style="visibility:hidden">
+    <thead>
+        <tr>
+            <th>UserCode</th>
+            <th>LoginName</th>
+            <th>Employee Info.</th>
+            <th>Active</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoginName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeCode) - @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActiveFlag)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { pUserCode = item.UserCode }) |
+                    @Html.ActionLink("Apps", "EditUserApps", "UserAccess", new { pUserCode = item.UserCode }, null) |
+                    @Html.ActionLink("Roles", "EditUserRoles", "UserAccess", new { pUserCode = item.UserCode }, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dataTables")
+    @Scripts.Render("~/bundles/angular")
+
+    <script type="text/javascript" language="javascript">
+
+        $(document).ready(function () {
+            //$("#example").show();
+            $("#Table01").css("visibility", "visible");
+            $('#Table01').dataTable({
+                "order": [[0, "asc"]],
+                "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+                "columnDefs": [
+                    {
+                        "targets": [1],
+                        "searchable": false
+                    }
+                ]
+            });
+        });
+
+    </script>
+}

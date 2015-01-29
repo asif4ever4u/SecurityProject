@@ -1,0 +1,90 @@
+﻿@model Security.Models.MMDModel<SecurityEF.SecurityRole, SecurityEF.SecurityForm, SecurityEF.SecurityRoleAccess>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Actions : @Model.Master1.RoleCode > @Model.Master2.ApplicationName > @Model.Master2.FormName</h2>
+
+@using (Html.BeginForm("Edit", "RoleAccess", new { pRoleCode = @Model.Master1.RoleCode, pApplicationCode = @Model.Master2.ApplicationCode, pFormCode = @Model.Master2.FormCode }, FormMethod.Post, new { id = "Form01" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.Master1.ID)
+    <fieldset>
+        <legend>SecurityUserAccess</legend>
+        @Html.HiddenFor(model => model.Master1.ID)
+        @Html.HiddenFor(model => model.Master1.RoleCode)
+        @Html.HiddenFor(model => model.Master2.ID)
+        @Html.HiddenFor(model => model.Master2.FormCode)
+        @Html.HiddenFor(model => model.Master2.ApplicationCode)
+
+        <table width="100%" class="display" id="Table01" cellspacing="0" style="visibility:hidden">
+            <thead>
+                <tr>
+                    <th>ActionCode</th>
+                    <th>Action</th>
+                    <th>Allow</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for (int i = 0; i < Model.DetailList.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => model.Master2.FormName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.DetailList[i].FormActionCode) - @Html.DisplayFor(m => m.DetailList[i].FormActionName)
+
+                            @Html.HiddenFor(m => m.DetailList[i].ID)
+                            @Html.HiddenFor(m => m.DetailList[i].RoleCode)
+                            @Html.HiddenFor(m => m.DetailList[i].ApplicationCode)
+                            @Html.HiddenFor(m => m.DetailList[i].FormCode)
+                            @Html.HiddenFor(m => m.DetailList[i].FormActionCode)
+                        <td>
+                            @Html.CheckBoxFor(m => m.DetailList[i].ActionValue2)
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Details", "UserApplications", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+            <input type="submit" value="Save" />
+    </fieldset>
+}
+<p>
+    @Html.ActionLink("Back to Form List", "IndexRoleForms", new { pRoleCode = @Model.Master1.RoleCode, pApplicationCode = @Model.Master2.ApplicationCode })
+</p>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dataTables")
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            //$("#example").show();
+            $("#Table01").css("visibility", "visible");
+            $('#Table01').dataTable({
+                "paging": false,
+                "info": false,
+                "order": [[0, "asc"]],
+                "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+                "columnDefs": [
+                    {
+                        "targets": [0],
+                        "searchable": true,
+                        "visible": false,
+                    }
+                ]
+            });
+        });
+
+    </script>
+}

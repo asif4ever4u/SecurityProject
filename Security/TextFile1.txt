@@ -1,0 +1,59 @@
+﻿http://www.progware.org/Blog/post/Left-Outer-Join-in-LINQ-to-Entities-(for-Entity-Framework-4).aspx
+
+http://stackoverflow.com/questions/1122942/linq-to-sql-left-outer-join-with-multiple-join-conditions
+
+http://stackoverflow.com/questions/5307731/linq-to-sql-multiple-joins-on-multiple-columns-is-this-possible
+
+http://msdn.microsoft.com/en-us/library/gg509017.aspx#DoubleJoin
+
+http://www.asp.net/mvc/overview/getting-started/getting-started-with-ef-using-mvc/async-and-stored-procedures-with-the-entity-framework-in-an-asp-net-mvc-application
+
+http://blogs.msdn.com/b/cdndevs/archive/2014/06/11/30-days-of-bootstrap-with-the-mvc-framework.aspx
+
+http://www.aspsnippets.com/Articles/Remember-UserName-and-Password-using-RememberMe-CheckBox-and-Cookies-in-ASPNet.aspx
+
+http://www.dotnet-tricks.com/Tutorial/mvc/G54G220114-Custom-Authentication-and-Authorization-in-ASP.NET-MVC.html
+
+http://www.codeproject.com/Articles/578374/AplusBeginner-splusTutorialplusonplusCustomplusF
+
+
+Sys.Admin
+SaSp555
+
+
+Admin
+Sasp1E2R3p
+
+
+
+
+
+USE [SecurityDB]
+GO
+
+/****** Object:  Table [dbo].[SecurityLogin]    Script Date: 1/4/2015 10:42:12 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[SecurityLogin](
+	[LoginName] [varchar](25) NOT NULL,
+	[Password] [varchar](100) NULL,
+	[FullName] [varchar](50) NULL,
+	[Roles] [varchar](50) NULL,
+ CONSTRAINT [PK_SecurityLogin] PRIMARY KEY CLUSTERED 
+(
+	[LoginName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+

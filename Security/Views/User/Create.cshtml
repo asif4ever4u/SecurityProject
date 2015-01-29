@@ -1,0 +1,176 @@
+﻿@model SecurityEF.SecurityUser
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Add User</h2>
+<div id="Container">
+    @using (Html.BeginForm("Create", "User", FormMethod.Post, new { id = "Form01" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>SecurityUser</legend>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.LoginName)
+            </div>
+            <div class="editor-field">
+                @*@Html.EditorFor(model => model.LoginName)*@
+                <div ng-app="crudModule">
+                    <div ng-controller="crudController">
+                        @Html.TextBoxFor(model => model.LoginName, new { style = "text-transform:uppercase", ng_model = "LoginName", ng_change = "getNameFromServer(LoginName)" })
+                        <b style="color: red">{{availableMessage}}</b>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.LoginName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Password, "Type Password")
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PasswordReType, "Re-Type Password")
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(model => model.PasswordReType)
+                @Html.ValidationMessageFor(model => model.PasswordReType)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.EmployeeCode, "Employee No.")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.EmployeeCode)
+                @Html.ValidationMessageFor(model => model.EmployeeCode)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.EmployeeName, "Employee Name")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.EmployeeName)
+                @Html.ValidationMessageFor(model => model.EmployeeName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Remarks)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Remarks)
+                @Html.ValidationMessageFor(model => model.Remarks)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Is Active")
+            </div>
+            <div class="editor-field">
+                @*@Html.EditorFor(model => model.ActiveFlag)
+                    @Html.ValidationMessageFor(model => model.ActiveFlag)*@
+
+                @Html.CheckBoxFor(model => model.ActiveFlag2)
+                @Html.ValidationMessageFor(model => model.ActiveFlag2)
+            </div>
+            <p>
+                <input class="btn btn-primary" type="submit" value="Create" />
+                <button class="btn btn-primary pull-left" type="submit">Save</button>
+            </p>
+        </fieldset>
+    }
+
+    @*<div ng-app="crudModule">
+            <div ng-controller="crudController">
+                <input id="ApplicationName2" name="ApplicationName2" type="text" value="ERP" ng-model="LoginName" ng-change="getNameFromServer(LoginName)">
+                <h1>{{LoginName}}</h1>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>LoginName</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="user in Users"> <span>{{user.LoginName}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>*@
+    <p>
+        @Html.ActionLink("Back to User List", "Index")
+    </p>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/angular")
+
+    <script src="~/js/Services/UserService.js"></script>
+    <script src="~/js/Controllers/UserController.js"></script>
+    <script>
+        // just for the demos, avoids form submit
+        jQuery.validator.setDefaults({
+            debug: true,
+            success: "valid"
+        });
+
+        $("#Form01").validate({
+            rules: {
+                //----------Validation rule for LoginName--------
+                LoginName: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 15,
+                    alphanumeric: true
+                },
+
+                //----------Validation rule for Password--------
+                Password: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 15,
+                    alphanumeric: true
+                },
+
+                //----------Validation rule for PasswordReType--------
+                PasswordReType: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 15,
+                    alphanumeric: true
+                },
+
+                //----------Validation rule for EmployeeCode--------
+                EmployeeCode: {
+                    required: true,
+                    maxlength: 10,
+                    alphanumeric: true
+                },
+
+                //----------Validation rule for EmployeeName--------
+                EmployeeName: {
+                    required: true,
+                    maxlength: 50
+                },
+
+                //----------Validation rule for Remarks--------
+                Remarks: {
+                    required: false,
+                    maxlength: 100
+                },
+            },
+            errorElement: 'span',
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    </script>
+}

@@ -1,0 +1,92 @@
+﻿@model SecurityEF.SecurityRole
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Role</h2>
+
+@using (Html.BeginForm("Edit", "Role", new {pRoleCode = @Model.RoleCode }, FormMethod.Post, new { id = "Form01" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>SecurityGroup</legend>
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RoleCode, "Role Code")
+        </div>
+
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.RoleCode, new { @readonly = "readonly", Style = "background:#cccccc;" })
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RoleName, "Role Name")
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RoleName)
+            @Html.ValidationMessageFor(model => model.RoleName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Remarks, "Remarks")
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Remarks)
+            @Html.ValidationMessageFor(model => model.Remarks)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ActiveFlag, "ActiveFlag")
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.ActiveFlag2)
+            @Html.ValidationMessageFor(model => model.ActiveFlag2)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+<p>
+    @Html.ActionLink("Back to Role List", "Index")
+</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        // just for the demos, avoids form submit
+        jQuery.validator.setDefaults({
+            debug: true,
+            success: "valid"
+        });
+
+        $("#Form01").validate({
+            rules: {
+                //----------Validation rule for GroupName--------
+                RoleName: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 50
+                },
+                //----------Validation rule for Remarks--------
+                Remarks: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 100
+                },
+            },
+            errorElement: 'span',
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+
+    </script>
+}

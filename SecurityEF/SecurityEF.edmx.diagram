@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="efba8ae265d5406fbc924035913b92f0" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="SecurityDBModel.SecurityForm" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SecurityDBModel.SecurityFormAction" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SecurityDBModel.SecurityRole" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SecurityDBModel.SecurityRoleAccess" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SecurityDBModel.SecurityRoleApplication" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SecurityDBModel.SecurityUser" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SecurityDBModel.SecurityUserAccess" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SecurityDBModel.SecurityUserApplication" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SecurityDBModel.SecurityUserRole" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SecurityDBModel.SecurityApplication" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="SecurityDBModel.SecurityLogin" Width="1.5" PointX="7.375" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

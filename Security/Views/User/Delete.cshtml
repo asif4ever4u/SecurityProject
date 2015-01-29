@@ -1,0 +1,54 @@
+﻿@model SecurityEF.SecurityUser
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>SecurityUser</legend>
+
+    <div class="display-label" style="font-weight: bold">
+        @Html.DisplayNameFor(model => model.LoginName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LoginName)
+    </div>
+
+    <div class="display-label" style="font-weight: bold">
+        @Html.DisplayNameFor(model => model.EmployeeCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EmployeeCode)
+    </div>
+
+    <div class="display-label" style="font-weight: bold">
+        @Html.DisplayNameFor(model => model.EmployeeName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EmployeeName)
+    </div>
+
+    <div class="display-label" style="font-weight: bold">
+        @Html.DisplayNameFor(model => model.Remarks)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Remarks)
+    </div>
+
+    <div class="display-label" style="font-weight: bold">
+        @Html.DisplayNameFor(model => model.ActiveFlag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ActiveFlag)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

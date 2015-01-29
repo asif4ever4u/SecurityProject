@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{248A2FE7-0C40-44A3-A0C4-4CF73ECE4C0D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SecurityEF</RootNamespace>
+    <AssemblyName>SecurityEF</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PartialEntities\SecurityLogin.cs" />
+    <Compile Include="PartialEntities\SecurityFormAction.cs" />
+    <Compile Include="PartialEntities\SecurityForm.cs" />
+    <Compile Include="PartialEntities\SecurityRoleAccess.cs" />
+    <Compile Include="PartialEntities\SecurityUserAccess.cs" />
+    <Compile Include="PartialEntities\SecurityRoleApplication.cs" />
+    <Compile Include="PartialEntities\SecurityUserApplication.cs" />
+    <Compile Include="PartialEntities\SecurityApplication.cs" />
+    <Compile Include="PartialEntities\SecurityRole.cs" />
+    <Compile Include="PartialEntities\SecurityUser.cs" />
+    <Compile Include="PartialEntities\SecurityUserRole.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="SecurityApplication.cs">
+      <DependentUpon>SecurityEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityEF.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SecurityEF.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityEF.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SecurityEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityEF.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SecurityEF.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityForm.cs">
+      <DependentUpon>SecurityEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityFormAction.cs">
+      <DependentUpon>SecurityEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityLogin.cs">
+      <DependentUpon>SecurityEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityRole.cs">
+      <DependentUpon>SecurityEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityRoleAccess.cs">
+      <DependentUpon>SecurityEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityRoleApplication.cs">
+      <DependentUpon>SecurityEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityUser.cs">
+      <DependentUpon>SecurityEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityUserAccess.cs">
+      <DependentUpon>SecurityEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityUserApplication.cs">
+      <DependentUpon>SecurityEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityUserRole.cs">
+      <DependentUpon>SecurityEF.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="SecurityEF.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SecurityEF.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <None Include="SecurityEF.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SecurityEF.edmx</DependentUpon>
+      <LastGenOutput>SecurityEF.Context.cs</LastGenOutput>
+    </None>
+    <None Include="SecurityEF.edmx.diagram">
+      <DependentUpon>SecurityEF.edmx</DependentUpon>
+    </None>
+    <None Include="SecurityEF.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SecurityEF.edmx</DependentUpon>
+      <LastGenOutput>SecurityEF.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

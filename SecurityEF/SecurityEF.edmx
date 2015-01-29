@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SecurityDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="SecurityApplication">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationCode" Type="char" MaxLength="3" />
+          <Property Name="ApplicationName" Type="varchar" MaxLength="50" />
+          <Property Name="FullName" Type="varchar" MaxLength="100" />
+          <Property Name="Remarks" Type="varchar" MaxLength="50" />
+          <Property Name="ActiveFlag" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="SecurityForm">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationCode" Type="char" MaxLength="3" />
+          <Property Name="FormCode" Type="char" MaxLength="3" />
+          <Property Name="FormName" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks" Type="varchar" MaxLength="50" />
+          <Property Name="ActiveFlag" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="SecurityFormAction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationCode" Type="char" MaxLength="3" />
+          <Property Name="FormCode" Type="char" MaxLength="3" />
+          <Property Name="FormActionCode" Type="char" MaxLength="3" />
+          <Property Name="FormActionName" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks" Type="varchar" MaxLength="100" />
+          <Property Name="ActiveFlag" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="SecurityLogin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" />
+          <Property Name="Roles" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SecurityRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleCode" Type="char" MaxLength="3" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remarks" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ActiveFlag" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SecurityRoleAccess">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleCode" Type="char" MaxLength="3" />
+          <Property Name="ApplicationCode" Type="char" MaxLength="3" />
+          <Property Name="FormCode" Type="char" MaxLength="5" />
+          <Property Name="FormActionCode" Type="char" MaxLength="3" />
+          <Property Name="ActionValue" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SecurityRoleApplication">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleCode" Type="char" MaxLength="3" />
+          <Property Name="ApplicationCode" Type="char" MaxLength="3" />
+          <Property Name="AllowFlag" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="SecurityUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserCode" Type="char" MaxLength="5" />
+          <Property Name="LoginName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmployeeCode" Type="varchar" MaxLength="50" />
+          <Property Name="EmployeeName" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks" Type="varchar" MaxLength="100" />
+          <Property Name="ActiveFlag" Type="char" MaxLength="1" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SecurityUserAccess">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserCode" Type="char" MaxLength="5" />
+          <Property Name="ApplicationCode" Type="char" MaxLength="3" />
+          <Property Name="FormCode" Type="char" MaxLength="3" />
+          <Property Name="FormActionCode" Type="char" MaxLength="3" />
+          <Property Name="ActionValue" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="SecurityUserApplication">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserCode" Type="char" MaxLength="5" />
+          <Property Name="ApplicationCode" Type="char" MaxLength="3" />
+          <Property Name="AllowFlag" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="SecurityUserRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserCode" Type="char" MaxLength="5" />
+          <Property Name="RoleCode" Type="char" MaxLength="3" />
+          <Property Name="EnableFlag" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityContainer Name="SecurityDBModelStoreContainer">
+          <EntitySet Name="SecurityApplication" EntityType="Self.SecurityApplication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityForm" EntityType="Self.SecurityForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityFormAction" EntityType="Self.SecurityFormAction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityLogin" EntityType="Self.SecurityLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityRole" EntityType="Self.SecurityRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityRoleAccess" EntityType="Self.SecurityRoleAccess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityRoleApplication" EntityType="Self.SecurityRoleApplication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityUser" EntityType="Self.SecurityUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityUserAccess" EntityType="Self.SecurityUserAccess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityUserApplication" EntityType="Self.SecurityUserApplication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityUserRole" EntityType="Self.SecurityUserRole" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SecurityDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="SecurityDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SecurityForms" EntityType="SecurityDBModel.SecurityForm" />
+          <EntitySet Name="SecurityFormActions" EntityType="SecurityDBModel.SecurityFormAction" />
+          <EntitySet Name="SecurityRoles" EntityType="SecurityDBModel.SecurityRole" />
+          <EntitySet Name="SecurityRoleAccesses" EntityType="SecurityDBModel.SecurityRoleAccess" />
+          <EntitySet Name="SecurityRoleApplications" EntityType="SecurityDBModel.SecurityRoleApplication" />
+          <EntitySet Name="SecurityUsers" EntityType="SecurityDBModel.SecurityUser" />
+          <EntitySet Name="SecurityUserAccesses" EntityType="SecurityDBModel.SecurityUserAccess" />
+          <EntitySet Name="SecurityUserApplications" EntityType="SecurityDBModel.SecurityUserApplication" />
+          <EntitySet Name="SecurityUserRoles" EntityType="SecurityDBModel.SecurityUserRole" />
+          <EntitySet Name="SecurityApplications" EntityType="SecurityDBModel.SecurityApplication" />
+          <EntitySet Name="SecurityLogins" EntityType="SecurityDBModel.SecurityLogin" />
+        </EntityContainer>
+        <EntityType Name="SecurityForm">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="FormCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="FormName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActiveFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SecurityFormAction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="FormCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="FormActionCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="FormActionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ActiveFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SecurityRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ActiveFlag" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SecurityRoleAccess">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="ApplicationCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="FormCode" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="FormActionCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="ActionValue" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SecurityRoleApplication">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="ApplicationCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="AllowFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SecurityUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserCode" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="LoginName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ActiveFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SecurityUserAccess">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserCode" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="ApplicationCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="FormCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="FormActionCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="ActionValue" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SecurityUserApplication">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserCode" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="ApplicationCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="AllowFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SecurityUserRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserCode" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="RoleCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="EnableFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SecurityApplication">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="ApplicationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActiveFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SecurityLogin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Roles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SecurityDBModelStoreContainer" CdmEntityContainer="SecurityDBEntities">
+          <EntitySetMapping Name="SecurityForms">
+            <EntityTypeMapping TypeName="SecurityDBModel.SecurityForm">
+              <MappingFragment StoreEntitySet="SecurityForm">
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="FormCode" ColumnName="FormCode" />
+                <ScalarProperty Name="ApplicationCode" ColumnName="ApplicationCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityFormActions">
+            <EntityTypeMapping TypeName="SecurityDBModel.SecurityFormAction">
+              <MappingFragment StoreEntitySet="SecurityFormAction">
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="FormActionName" ColumnName="FormActionName" />
+                <ScalarProperty Name="FormActionCode" ColumnName="FormActionCode" />
+                <ScalarProperty Name="FormCode" ColumnName="FormCode" />
+                <ScalarProperty Name="ApplicationCode" ColumnName="ApplicationCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityRoles">
+            <EntityTypeMapping TypeName="SecurityDBModel.SecurityRole">
+              <MappingFragment StoreEntitySet="SecurityRole">
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityRoleAccesses">
+            <EntityTypeMapping TypeName="SecurityDBModel.SecurityRoleAccess">
+              <MappingFragment StoreEntitySet="SecurityRoleAccess">
+                <ScalarProperty Name="ActionValue" ColumnName="ActionValue" />
+                <ScalarProperty Name="FormActionCode" ColumnName="FormActionCode" />
+                <ScalarProperty Name="FormCode" ColumnName="FormCode" />
+                <ScalarProperty Name="ApplicationCode" ColumnName="ApplicationCode" />
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityRoleApplications">
+            <EntityTypeMapping TypeName="SecurityDBModel.SecurityRoleApplication">
+              <MappingFragment StoreEntitySet="SecurityRoleApplication">
+                <ScalarProperty Name="AllowFlag" ColumnName="AllowFlag" />
+                <ScalarProperty Name="ApplicationCode" ColumnName="ApplicationCode" />
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityUsers">
+            <EntityTypeMapping TypeName="SecurityDBModel.SecurityUser">
+              <MappingFragment StoreEntitySet="SecurityUser">
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityUserAccesses">
+            <EntityTypeMapping TypeName="SecurityDBModel.SecurityUserAccess">
+              <MappingFragment StoreEntitySet="SecurityUserAccess">
+                <ScalarProperty Name="ActionValue" ColumnName="ActionValue" />
+                <ScalarProperty Name="FormActionCode" ColumnName="FormActionCode" />
+                <ScalarProperty Name="FormCode" ColumnName="FormCode" />
+                <ScalarProperty Name="ApplicationCode" ColumnName="ApplicationCode" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityUserApplications">
+            <EntityTypeMapping TypeName="SecurityDBModel.SecurityUserApplication">
+              <MappingFragment StoreEntitySet="SecurityUserApplication">
+                <ScalarProperty Name="AllowFlag" ColumnName="AllowFlag" />
+                <ScalarProperty Name="ApplicationCode" ColumnName="ApplicationCode" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityUserRoles">
+            <EntityTypeMapping TypeName="SecurityDBModel.SecurityUserRole">
+              <MappingFragment StoreEntitySet="SecurityUserRole">
+                <ScalarProperty Name="EnableFlag" ColumnName="EnableFlag" />
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityApplications">
+            <EntityTypeMapping TypeName="SecurityDBModel.SecurityApplication">
+              <MappingFragment StoreEntitySet="SecurityApplication">
+                <ScalarProperty Name="ActiveFlag" ColumnName="ActiveFlag" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+                <ScalarProperty Name="ApplicationCode" ColumnName="ApplicationCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityLogins">
+            <EntityTypeMapping TypeName="SecurityDBModel.SecurityLogin">
+              <MappingFragment StoreEntitySet="SecurityLogin">
+                <ScalarProperty Name="Roles" ColumnName="Roles" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
