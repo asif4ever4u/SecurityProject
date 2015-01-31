@@ -19,8 +19,8 @@ http://www.codeproject.com/Articles/578374/AplusBeginner-splusTutorialplusonplus
 
 Sys.Admin
 SaSp555
-
-
+This is done through command
+  
 Admin
 Sasp1E2R3p
 
